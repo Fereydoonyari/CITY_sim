@@ -1,3 +1,5 @@
+package citysim;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -8,17 +10,22 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 
-class Person extends Entity {
+class Car extends Entity {
     private BufferedImage sprite;
 
-    public Person(int x, int y, String assetPath) throws IOException {
+    public Car(int x, int y, String assetPath) throws SimulationException {
         super(x, y);
-        sprite = ImageIO.read(new File(assetPath));
+        try {
+            sprite = ImageIO.read(new File(assetPath));
+        } catch (IOException e) {
+            throw new SimulationException("Car asset not found at: " + assetPath);
+        }
     }
 
     @Override
     public void update() {
-        y += 1;
+        x += 2;
+        if (x > 800) x = 0;
     }
 
     @Override

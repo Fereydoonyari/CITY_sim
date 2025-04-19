@@ -1,3 +1,5 @@
+package citysim;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -7,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 
-
 public class IsometricCitySim {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -16,8 +17,9 @@ public class IsometricCitySim {
             frame.setSize(800, 600);
             try {
                 frame.setContentPane(new CityPanel());
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (SimulationException e) {
+                JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             frame.setVisible(true);
         });
